@@ -4,10 +4,12 @@
   <artifactId>SpringExcel</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+
   <properties>
          <project.build.sourceEncoding>
              UTF-8
          </project.build.sourceEncoding>
+	  <spring-version>4.3.5.RELEASE</spring-version>
   </properties>
   <dependencies>
 		   <dependency>
@@ -27,14 +29,14 @@
 			<dependency>
 			    <groupId>org.springframework</groupId>
 			    <artifactId>spring-aop</artifactId>
-			    <version>4.1.6.RELEASE</version>
+			    <version>${spring-version}</version>
 			</dependency>
 			
 			<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
 			<dependency>
 			    <groupId>org.springframework</groupId>
 			    <artifactId>spring-beans</artifactId>
-			    <version>4.1.6.RELEASE</version>
+			    <version>${spring-version}</version>
 			</dependency>
 			
 			
@@ -42,7 +44,7 @@
 			<dependency>
 			    <groupId>org.springframework</groupId>
 			    <artifactId>spring-context</artifactId>
-			    <version>4.1.6.RELEASE</version>
+			    <version>${spring-version}</version>
 			</dependency>
 			
 			
@@ -51,7 +53,7 @@
 			<dependency>
 			    <groupId>org.springframework</groupId>
 			    <artifactId>spring-expression</artifactId>
-			    <version>4.1.6.RELEASE</version>
+			    <version>${spring-version}</version>
 			</dependency>
 			
 			
@@ -59,7 +61,7 @@
 			<dependency>
 			    <groupId>org.springframework</groupId>
 			    <artifactId>spring-web</artifactId>
-			    <version>4.1.6.RELEASE</version>
+			    <version>${spring-version}</version>
 			</dependency>
 			
 			
@@ -68,7 +70,7 @@
 			<dependency>
 			    <groupId>org.springframework</groupId>
 			    <artifactId>spring-webmvc</artifactId>
-			    <version>4.1.6.RELEASE</version>
+			    <version>${spring-version}</version>
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 			<dependency>
@@ -132,21 +134,155 @@
 			    <version>3.10-FINAL</version>
 			</dependency>
 			
+			
+			
+			
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-context-support</artifactId>
+			    <version>${spring-version}</version>
+			</dependency>
+			
+			<!-- aspectJ AOP 织入器 -->
+	        <dependency>
+	            <groupId>org.aspectj</groupId>
+	            <artifactId>aspectjweaver</artifactId>
+	            <version>1.8.9</version>
+	        </dependency>
+	        
+	         <!--mybatis-spring适配器 -->
+	        <dependency>
+	            <groupId>org.mybatis</groupId>
+	            <artifactId>mybatis-spring</artifactId>
+	            <version>1.3.0</version>
+	        </dependency>
+	        
+	        <!--Spring java数据库访问包，在本例中主要用于提供数据源 -->
+	        <dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-jdbc</artifactId>
+	            <version>4.1.6.RELEASE</version>
+	        </dependency>
+	        
+	        <!--mysql数据库驱动 -->
+	        <dependency>
+	            <groupId>mysql</groupId>
+	            <artifactId>mysql-connector-java</artifactId>
+	            <version>5.1.38</version>
+	        </dependency>
+
+	        <!--log4j日志包 -->
+	        <dependency>
+	            <groupId>org.apache.logging.log4j</groupId>
+	            <artifactId>log4j-core</artifactId>
+	            <version>2.6.1</version>
+	        </dependency>
+
+	         <!-- mybatis ORM框架 -->
+	        <dependency>
+	            <groupId>org.mybatis</groupId>
+	            <artifactId>mybatis</artifactId>
+	            <version>3.4.1</version>
+	        </dependency>
+
+	        <!--c3p0 连接池 -->
+	        <dependency>
+	            <groupId>c3p0</groupId>
+	            <artifactId>c3p0</artifactId>
+	            <version>0.9.1.2</version>
+	        </dependency>
+
+	        <!-- JSTL -->
+	        <dependency>
+	            <groupId>javax.servlet</groupId>
+	            <artifactId>jstl</artifactId>
+	            <version>1.2</version>
+	        </dependency>
+	        
+	        
+	        <!--JSP -->
+	        <dependency>
+	            <groupId>javax.servlet.jsp</groupId>
+	            <artifactId>jsp-api</artifactId>
+	            <version>2.1</version>
+	            <scope>provided</scope>
+	        </dependency>
+
+
+	         <!-- FreeMarker -->
+	        <dependency>
+	            <groupId>org.freemarker</groupId>
+	            <artifactId>freemarker</artifactId>
+	            <version>2.3.23</version>
+	        </dependency>
+	        
+	        <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+			<dependency>
+			    <groupId>javax.validation</groupId>
+			    <artifactId>validation-api</artifactId>
+			    <version>2.0.1.Final</version>
+			</dependency>
+
+
+		  <!--Spring-->
+		  <dependency>
+			  <groupId>org.springframework</groupId>
+			  <artifactId>spring-core</artifactId>
+			  <version>${spring-version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.springframework</groupId>
+			  <artifactId>spring-orm</artifactId>
+			  <version>${spring-version}</version>
+		  </dependency>
+		  <!--Spring transaction-->
+		  <dependency>
+			  <groupId>org.springframework</groupId>
+			  <artifactId>spring-tx</artifactId>
+			  <version>${spring-version}</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>org.springframework</groupId>
+			  <artifactId>spring-mock</artifactId>
+			  <version>2.0.8</version>
+		  </dependency>
+
+		  <dependency>
+			  <groupId>com.github.pagehelper</groupId>
+			  <artifactId>pagehelper</artifactId>
+			  <version>3.7.3</version>
+		  </dependency>
+		  <dependency>
+			  <groupId>com.github.jsqlparser</groupId>
+			  <artifactId>jsqlparser</artifactId>
+			  <version>0.9.1</version>
+		  </dependency>
+
+		  <dependency>
+			  <groupId>org.jetbrains</groupId>
+			  <artifactId>annotations-java5</artifactId>
+			  <version>RELEASE</version>
+		  </dependency>
     </dependencies>
   
   
   <build>
+
    <finalName>SpringExcel</finalName>
-    <!-- <sourceDirectory>src</sourceDirectory> -->
-    <resources>
-      <resource>
-        <directory>src</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
-    </resources>
-   
+     <!-- <resources>
+        &lt;!&ndash;表示把java目录下的有关xml文件,properties文件编译/打包的时候放在resource目录下&ndash;&gt;
+         <resource>
+           <directory>${basedir}/src/main/java</directory>
+              <includes>
+                  <include>**/*.properties</include>
+                      <include>**/*.xml</include>
+              </includes>
+         </resource>
+          <resource>
+                <directory>${basedir}/src/main/resources</directory>
+          </resource>
+      </resources>-->
 
     <plugins>
       <plugin>
@@ -159,27 +295,27 @@
       </plugin>
       
       
-      <plugin>
-          <!-- 3个可用插件 -->
+      <!-- <plugin>
+          3个可用插件
          <groupId>org.apache.tomcat.maven</groupId>
-        <!--<artifactId>tomcat6-maven-plugin</artifactId>  -->                   <!-- 命令为tomcat6:redeploy -->
-         <!-- <groupId>org.apache.tomcat.maven</groupId> -->
-         <artifactId>tomcat7-maven-plugin</artifactId>    <!-- 命令为tomcat7:redeploy -->
-        <!-- <groupId>org.codehaus.mojo</groupId> -->
-         <!-- <artifactId>tomcat-maven-plugin</artifactId> -->        <!-- 命令为tomcat:redeploy -->
+        <artifactId>tomcat6-maven-plugin</artifactId>                    命令为tomcat6:redeploy
+         <groupId>org.apache.tomcat.maven</groupId>
+         <artifactId>tomcat7-maven-plugin</artifactId>    命令为tomcat7:redeploy
+        <groupId>org.codehaus.mojo</groupId>
+         <artifactId>tomcat-maven-plugin</artifactId>        命令为tomcat:redeploy
          <version>2.2</version>
        <configuration>
-           <!-- <url>http://localhost:8080/manager</url> -->            <!-- tomcat6部署管理路径 -->
-           <url>http://localhost:8080/manager</url>                <!-- tomcat7部署管理路径 -->
-          <username>admin</username>                                <!-- tomcat的管理员账号 -->
+           <url>http://localhost:8080/manager</url>            tomcat6部署管理路径
+           <url>http://localhost:8080/manager</url>                tomcat7部署管理路径
+          <username>admin</username>                                tomcat的管理员账号
            <password>admin</password>
            <port>8080</port>
-           <path>/${project.build.finalName}</path>                            <!-- 部署路径 -->
+           <path>/${project.build.finalName}</path>                            部署路径
           <charset>UTF-8</charset>
            <encoding>UTF-8</encoding>
-           <!-- 运行redeploy命令前，要能正常访问http://localhost:8080/manager-->
+           运行redeploy命令前，要能正常访问http://localhost:8080/manager
        </configuration>
-      </plugin>
+      </plugin> -->
     </plugins>
   </build>
 </project>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.excel.Dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.spring.excel.Entity.Student">
+    <id column="Uid" jdbcType="BINARY" property="uid" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Age" jdbcType="INTEGER" property="age" />
+    <result column="ClassId" jdbcType="INTEGER" property="classid" />
+    <result column="SeClassId" jdbcType="INTEGER" property="seclassid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Uid, Name, Age, ClassId, SeClassId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="byte[]" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where Uid = #{uid,jdbcType=BINARY}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="byte[]">
+    delete from student
+    where Uid = #{uid,jdbcType=BINARY}
+  </delete>
+  <insert id="insert" parameterType="com.spring.excel.Entity.Student">
+    insert into student (Uid, Name, Age, 
+      ClassId, SeClassId)
+    values (#{uid,jdbcType=BINARY}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{classid,jdbcType=INTEGER}, #{seclassid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.excel.Entity.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        Uid,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="age != null">
+        Age,
+      </if>
+      <if test="classid != null">
+        ClassId,
+      </if>
+      <if test="seclassid != null">
+        SeClassId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BINARY},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="seclassid != null">
+        #{seclassid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.excel.Entity.Student">
+    update student
+    <set>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        Age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null">
+        ClassId = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="seclassid != null">
+        SeClassId = #{seclassid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Uid = #{uid,jdbcType=BINARY}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.excel.Entity.Student">
+    update student
+    set Name = #{name,jdbcType=VARCHAR},
+      Age = #{age,jdbcType=INTEGER},
+      ClassId = #{classid,jdbcType=INTEGER},
+      SeClassId = #{seclassid,jdbcType=INTEGER}
+    where Uid = #{uid,jdbcType=BINARY}
+  </update>
+  <select id="selectByCondition" parameterType="com.spring.excel.Entity.Student" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from student
+    <where>
+      1=1
+      <if test="uid != null">
+        and Uid=#{uid,jdbcType=BINARY}
+      </if>
+      <if test="name != null">
+        and Name=#{name,jdbcType=VARCHAR}
+      </if>
+      <if test="age != null">
+        and Age=#{age,jdbcType=INTEGER}
+      </if>
+      <if test="classid != null">
+        and ClassId=#{classid,jdbcType=INTEGER}
+      </if>
+      <if test="seclassid != null">
+        and ClassId=#{seclassid,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+</mapper>

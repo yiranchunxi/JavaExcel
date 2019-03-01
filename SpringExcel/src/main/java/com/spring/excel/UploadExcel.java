@@ -28,8 +28,8 @@ public class UploadExcel {
 		   if(!file.isEmpty()) {
 			   String location=session.getServletContext().getRealPath("upload");
 			   String url=location+"_"+System.currentTimeMillis()+file.getOriginalFilename();
-			  // System.out.println(location);
-			  // System.out.println(url);
+			   System.out.println(location);
+			   System.out.println(url);
 			   diskFile=new File(url);
 			   file.transferTo(diskFile);
 			   System.out.println(11111);

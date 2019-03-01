@@ -5,8 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -142,6 +144,8 @@ public class ReadExcel {
 	  
 	  //得到第一个shell
 	  Sheet sheet=wb.getSheetAt(0);
+
+	 
 	  //得到Excel的行数
 	  this.totalRows=sheet.getPhysicalNumberOfRows();
 	  System.out.println("得到Excel的行数"+totalRows);
@@ -155,7 +159,7 @@ public class ReadExcel {
 	  for(int r=0;r<totalRows;r++) {
 		  
 		  Row row=sheet.getRow(r);
-		  
+		 
 		  if(row==null)continue;
 		  
 		   //循环Excel的列
@@ -164,7 +168,9 @@ public class ReadExcel {
 			  
 			  if(cell!=null) {
 				 String value =cell.getStringCellValue();
-				 
+				 CellStyle cellStyle=cell.getCellStyle();
+				 System.out.println("水平方向"+cellStyle.getAlignment());
+				 System.out.println("垂直方向"+cellStyle.getVerticalAlignment());
 				 System.out.println("value="+value);
 			  }
 			 
