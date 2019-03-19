@@ -23,13 +23,14 @@
       <url-pattern>/</url-pattern>
   </servlet-mapping>
     <!--spring listener config-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+
     <!--编码过滤器 -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>

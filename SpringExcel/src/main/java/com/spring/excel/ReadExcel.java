@@ -4,14 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import com.spring.excel.Entity.TemplateExcel;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,7 +46,12 @@ public class ReadExcel {
 	}
 	
 	
-	
+	private  final  int CELL_TYPE_NUMERIC = 0;
+	private  final  int CELL_TYPE_STRING = 1;
+	private  final  int CELL_TYPE_FORMULA = 2;
+	private  final  int CELL_TYPE_BLANK = 3;
+	private  final  int CELL_TYPE_BOOLEAN = 4;
+	private  final  int CELL_TYPE_ERROR = 5;
 	   
 	/**
 	  * 验证EXCEL文件
@@ -63,8 +69,8 @@ public class ReadExcel {
 	}
 	
 	
-	public void getExcelInfo(String fileName,File file) {
-		
+	public List<TemplateExcel> getExcelInfo(String fileName,File file) {
+		List<TemplateExcel> templateExcels=new ArrayList<>();
 		 //初始化输入流
 		InputStream is=null;
 		try {
@@ -80,7 +86,7 @@ public class ReadExcel {
 	          //根据新建的文件实例化输入流
 	          is = new FileInputStream(file);
 	          //根据excel里面的内容读取客户信息
-	          getExcelInfo(is, isExcel2003); 
+			templateExcels=getExcelInfo(is, isExcel2003);
 	          is.close();
 			
 		}catch (Exception e) {
@@ -100,7 +106,7 @@ public class ReadExcel {
 			
 			
 		}
-		
+		return templateExcels;
 	}
 	
 	
@@ -111,9 +117,9 @@ public class ReadExcel {
 	   * @return
 	   * @throws IOException
 	   */
-	private void getExcelInfo(InputStream is, boolean isExcel2003) {
+	private List<TemplateExcel> getExcelInfo(InputStream is, boolean isExcel2003) {
 		// TODO Auto-generated method stub
-		
+		List<TemplateExcel> templateExcels=new ArrayList<>();
 		try {
 			 /** 根据版本选择创建Workbook的方式 */
 			Workbook wb=null;
@@ -126,22 +132,24 @@ public class ReadExcel {
 				wb=new XSSFWorkbook(is);
 			}
 			//读取Excel里面客户的信息
-			readExcelValue(wb);
+			templateExcels=readExcelValue(wb);
 			
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();  
 		}
-		
-		
+
+		return templateExcels;
 	}
 	/**
 	   * 读取Excel里面的信息
 	   * @param wb
 	   * @return
 	   */
-	private void readExcelValue(Workbook wb) {
-	  
+	private List<TemplateExcel> readExcelValue(Workbook wb) {
+
+
+	  List<TemplateExcel> templateExcels=new ArrayList<>();
 	  //得到第一个shell
 	  Sheet sheet=wb.getSheetAt(0);
 
@@ -156,29 +164,89 @@ public class ReadExcel {
 	  }
 	 
 	  //循环Excel行数
-	  for(int r=0;r<totalRows;r++) {
+	  for(int r=2;r<totalRows;r++) {
 		  
 		  Row row=sheet.getRow(r);
 		 
 		  if(row==null)continue;
-		  
+		  TemplateExcel templateExcel=new TemplateExcel();
 		   //循环Excel的列
 		  for(int c=0;c<this.totalCells;c++) {
 			  Cell cell=row.getCell(c);
-			  
+
 			  if(cell!=null) {
-				 String value =cell.getStringCellValue();
-				 CellStyle cellStyle=cell.getCellStyle();
-				 System.out.println("水平方向"+cellStyle.getAlignment());
-				 System.out.println("垂直方向"+cellStyle.getVerticalAlignment());
-				 System.out.println("value="+value);
+
+
+			  	switch (c){
+					case 0:
+						System.out.println(cell.getCellFormula());
+						templateExcel.setSid(cell.getCellFormula());
+						break;
+					case 1:
+						Date date=DateUtil.getJavaDate(cell.getNumericCellValue());
+						/*SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+						String value=format.format(date);
+						System.out.println(value);*/
+						templateExcel.setSdate(date);
+						break;
+					case 2:
+						System.out.println(cell.getStringCellValue());
+						templateExcel.setToday(cell.getStringCellValue());
+						break;
+					case 3:
+						System.out.println(cell.getNumericCellValue());
+						templateExcel.setTemplateId((int)cell.getNumericCellValue());
+						break;
+					case 4:
+						System.out.println(cell.getStringCellValue());
+						templateExcel.setTemplateInfo(cell.getStringCellValue());
+						break;
+					case 5:
+						System.out.println(cell.getStringCellValue());
+						templateExcel.setWorkNumber(cell.getStringCellValue());
+						break;
+					default:
+						break;
+				}
+
+
+			  	 //System.out.println(cell.getCellType());
+				 //String value =cell.getStringCellValue();
+
+
+					/*switch (cell.getCellType()){
+
+						case CELL_TYPE_NUMERIC:
+							System.out.println(DateUtil.getJavaDate(cell.getNumericCellValue()));
+
+							break;
+						case CELL_TYPE_STRING:
+							System.out.println(cell.getStringCellValue());
+							break;
+						case CELL_TYPE_FORMULA:
+							System.out.println(cell.getCellFormula());
+							break;
+						case CELL_TYPE_BLANK:
+							System.out.println("空值");
+							break;
+						case CELL_TYPE_BOOLEAN:
+							System.out.println(cell.getBooleanCellValue());
+							break;
+						case CELL_TYPE_ERROR:
+							System.out.println("错误的数据类型");
+							break;
+						default:
+							System.out.println("不知道是啥数据");
+					}*/
 			  }
 			 
 		  }
+
+		  templateExcels.add(templateExcel);
 		  
 	  }
 		  
-	  
+	  return templateExcels;
 	  
 	}
 
