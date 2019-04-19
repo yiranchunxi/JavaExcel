@@ -10,17 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/mvc")
 public class HelloController {
 	
 
 
-	 @RequestMapping("/hello")
+	 @RequestMapping("/welcome")
 	 public String hello(){
 
 
 
-	        return "hello";
+	        return "welcome";
 	 }
 
 
