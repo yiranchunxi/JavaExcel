@@ -8,5 +8,6 @@
 </head>
 <body>
 “Hello World”
+<a href="./notify/download">下载excel</a>
 </body>
 </html>

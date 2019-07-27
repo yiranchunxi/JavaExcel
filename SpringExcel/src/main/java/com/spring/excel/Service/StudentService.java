@@ -18,7 +18,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public int insert(Student record) {
-        return studentMapper.insert(record);
+        return  studentMapper.insert(record);
     }
 
     @Override

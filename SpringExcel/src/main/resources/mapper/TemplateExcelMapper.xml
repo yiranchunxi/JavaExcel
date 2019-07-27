@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
+<mapper namespace="com.spring.excel.Dao.TemplateExcelMapper">
+  <resultMap id="BaseResultMap" type="com.spring.excel.Entity.TemplateExcel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="sdate" jdbcType="DATE" property="sdate" />
+    <result column="today" jdbcType="VARCHAR" property="today" />
+    <result column="template_id" jdbcType="INTEGER" property="templateId" />
+    <result column="template_info" jdbcType="VARCHAR" property="templateInfo" />
+    <result column="work_number" jdbcType="VARCHAR" property="workNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sid, sdate, today, template_id, template_info, work_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from excel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from excel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.spring.excel.Entity.TemplateExcel">
+    insert into excel ( sid, sdate,
+      today, template_id, template_info, 
+      work_number)
+    values (#{sid,jdbcType=VARCHAR}, #{sdate,jdbcType=DATE},
+      #{today,jdbcType=VARCHAR}, #{templateId,jdbcType=INTEGER}, #{templateInfo,jdbcType=VARCHAR}, 
+      #{workNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.excel.Entity.TemplateExcel">
+    insert into excel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="sdate != null">
+        sdate,
+      </if>
+      <if test="today != null">
+        today,
+      </if>
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="templateInfo != null">
+        template_info,
+      </if>
+      <if test="workNumber != null">
+        work_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="sid != null">
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="sdate != null">
+        #{sdate,jdbcType=DATE},
+      </if>
+      <if test="today != null">
+        #{today,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null">
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="templateInfo != null">
+        #{templateInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="workNumber != null">
+        #{workNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.excel.Entity.TemplateExcel">
+    update excel
+    <set>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="sdate != null">
+        sdate = #{sdate,jdbcType=DATE},
+      </if>
+      <if test="today != null">
+        today = #{today,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null">
+        template_id = #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="templateInfo != null">
+        template_info = #{templateInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="workNumber != null">
+        work_number = #{workNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.excel.Entity.TemplateExcel">
+    update excel
+    set sid = #{sid,jdbcType=VARCHAR},
+      sdate = #{sdate,jdbcType=DATE},
+      today = #{today,jdbcType=VARCHAR},
+      template_id = #{templateId,jdbcType=INTEGER},
+      template_info = #{templateInfo,jdbcType=VARCHAR},
+      work_number = #{workNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    <!-- statement，内容：sql语句。id：唯一标识，随便写，在同一个命名空间下保持唯一
+          resultType：sql语句查询结果集的封装类型,tb_user即为数据库中的表
+        -->
+
+    SELECT
+    <include refid="Base_Column_List"/>
+    from excel
+  </select>
+</mapper>
