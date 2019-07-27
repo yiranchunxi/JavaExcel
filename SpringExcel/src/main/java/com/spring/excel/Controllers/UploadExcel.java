@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
+@RequestMapping("/upload")
 public class UploadExcel {
 	
 	    @Autowired
@@ -23,7 +24,7 @@ public class UploadExcel {
 		     return "upload";
 		}
 
-	   @RequestMapping("file/upload")
+	   @RequestMapping("file/excel")
 	   public String upload(HttpSession session,@RequestParam MultipartFile file) throws IllegalStateException,IOException{
 		   File diskFile = null;
 		   if(!file.isEmpty()) {

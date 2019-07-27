@@ -8,7 +8,7 @@
 </head>
 <body>
      
-    <form action="file/upload" enctype="multipart/form-data" method="post">
+    <form action="${pageContext.request.contextPath}/upload/file/excel" enctype="multipart/form-data" method="post">
     		<input type="file" name="file">
     		<input type="submit" value="excel">
     </form> 

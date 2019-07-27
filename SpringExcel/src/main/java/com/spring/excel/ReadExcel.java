@@ -162,31 +162,35 @@ public class ReadExcel {
 	  if(totalRows>=1 &&sheet.getRow(0)!=null) {
 		  this.totalCells=sheet.getRow(0).getPhysicalNumberOfCells();
 	  }
-	 
+	  //得到自定义行数
+	 int customRows= (int) sheet.getRow(0).getCell(totalCells-1).getNumericCellValue();
+
+	  System.out.println("customRows"+customRows);
+
 	  //循环Excel行数
-	  for(int r=2;r<totalRows;r++) {
+	  for(int r=2;r<27;r++) {
 		  
 		  Row row=sheet.getRow(r);
 		 
 		  if(row==null)continue;
 		  TemplateExcel templateExcel=new TemplateExcel();
+		  System.out.print("第"+r+"行type");
 		   //循环Excel的列
 		  for(int c=0;c<this.totalCells;c++) {
 			  Cell cell=row.getCell(c);
 
 			  if(cell!=null) {
-
-
-			  	switch (c){
+			  	System.out.print(cell.getCellType());
+			  	/*switch (c){
 					case 0:
 						System.out.println(cell.getCellFormula());
 						templateExcel.setSid(cell.getCellFormula());
 						break;
 					case 1:
 						Date date=DateUtil.getJavaDate(cell.getNumericCellValue());
-						/*SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+						*//*SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 						String value=format.format(date);
-						System.out.println(value);*/
+						System.out.println(value);*//*
 						templateExcel.setSdate(date);
 						break;
 					case 2:
@@ -207,7 +211,7 @@ public class ReadExcel {
 						break;
 					default:
 						break;
-				}
+				}*/
 
 
 			  	 //System.out.println(cell.getCellType());
@@ -241,8 +245,8 @@ public class ReadExcel {
 			  }
 			 
 		  }
-
-		  templateExcels.add(templateExcel);
+		 System.out.println("-----------");
+		  //templateExcels.add(templateExcel);
 		  
 	  }
 		  

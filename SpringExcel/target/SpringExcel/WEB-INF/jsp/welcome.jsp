@@ -4,13 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>UploadExcel</title>
+<title>表格上传管理</title>
 </head>
 <body>
-     
-    <form action="${pageContext.request.contextPath}/upload/file/excel" enctype="multipart/form-data" method="post">
-    		<input type="file" name="file">
-    		<input type="submit" value="excel">
-    </form> 
+
+        <p>目录</p>
+        <hr>
+        <div>
+            <a href="${pageContext.request.contextPath}/excel/list">已上传表格</a>
+        </div>
+        <div>
+            <a href="${pageContext.request.contextPath}/upload/excel">上传表格</a>
+        </div>
+
 </body>
 </html>
